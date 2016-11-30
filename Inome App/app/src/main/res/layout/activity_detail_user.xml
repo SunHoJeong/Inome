@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="F_ID"
+                android:textSize="25dp"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/textView_detail_familyId"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:textSize="25dp"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="ID"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/textView_detail_id"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:textSize="25dp"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="이름"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/textView_detail_name"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:textSize="25dp"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Phone"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/textView_detail_phone"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:textSize="25dp"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="권한"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/textView_detail_authority"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:textSize="25dp"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="회원정보수정"
+            android:onClick="reviseClicked"/>
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/btn_familyMember"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="구성원 목록 보기"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:onClick="showFamilyMemClicked"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="IR 디바이스 목록 보기"
+        android:layout_below="@+id/btn_familyMember"
+        android:layout_centerHorizontal="true"
+        android:onClick="showIRDeviceClicked"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="도어락 로그 보기"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/button2"
+        android:onClick="showLogClicked"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="로그아웃"
+        android:layout_below="@+id/button2"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/button3"
+        android:onClick="logoutClicked"/>
+
+    <TextView
+        android:layout_width="140dp"
+        android:layout_height="30dp"
+        android:text="FamilyId: "
+        android:textSize="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@+id/button3"
+        android:id="@+id/textView6" />
+    <TextView
+        android:id="@+id/textView_familyInfo"
+        android:layout_width="200dp"
+        android:layout_height="35dp"
+        android:textSize="25dp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/textView6" />
+
+</RelativeLayout>
