@@ -39,12 +39,6 @@ public class UserInfo extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_userinfo);
 
-        intent = getIntent();
-        mode = intent.getIntExtra("mode", 0);
-        familyId = intent.getStringExtra("familyId");
-        familyPw = intent.getStringExtra("familyPw");
-        resUserInfo = (ResponseUserInfo)intent.getSerializableExtra("userInfo");
-
         holder = new ViewHolder();
         holder.editText_id = (EditText)findViewById(R.id.editText_userInfo_id);
         holder.editText_pw = (EditText)findViewById(R.id.editText_userInfo_pw);
@@ -52,8 +46,31 @@ public class UserInfo extends Activity {
         holder.editText_phone = (EditText)findViewById(R.id.editText_userInfo_phone);
         holder.spinner_authority = (Spinner)findViewById(R.id.spinner_userInfo_authority);
 
+        intent = getIntent();
+        mode = intent.getIntExtra("mode", 0);
+        familyId = intent.getStringExtra("familyId");
+        familyPw = intent.getStringExtra("familyPw");
+
+        if(mode == MainActivity.MODE_REVISE){
+            resUserInfo = (ResponseUserInfo)intent.getSerializableExtra("userInfo");
+            beforeName = resUserInfo.getName();
+            holder.editText_id.setText(resUserInfo.getId());
+            holder.editText_pw.setText(resUserInfo.getPw());
+            holder.editText_name.setText(resUserInfo.getName());
+            holder.editText_phone.setText(resUserInfo.getPhone());
+
+            Log.i("UserInfo", "--Oncreate revise 모드 --");
+        }
+        else if(mode == MainActivity.MODE_ADD){
+            beforeName = null;
+            Log.i("UserInfo", "--Oncreate add 모드 --");
+        }
+        else{
+            Log.i("UserInfo", "--Oncreate 모드 오류입니다--mode:"+mode);
+        }
+
         final String[] str_authority = {"선택해주세요","send","receive"};
-        adapter_authority = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, str_authority);
+        adapter_authority = new ArrayAdapter<String>(this, R.layout.spinner_item, str_authority);
         holder.spinner_authority.setAdapter(adapter_authority);
         holder.spinner_authority.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -76,22 +93,6 @@ public class UserInfo extends Activity {
             }
         });
 
-        if(mode == MainActivity.MODE_REVISE){
-            beforeName = resUserInfo.getName();
-            holder.editText_id.setText(resUserInfo.getId());
-            holder.editText_pw.setText(resUserInfo.getPw());
-            holder.editText_name.setText(resUserInfo.getName());
-            holder.editText_phone.setText(resUserInfo.getPhone());
-
-            Log.i("UserInfo", "--Oncreate revise 모드 --");
-        }
-        else if(mode == MainActivity.MODE_ADD){
-            beforeName = null;
-            Log.i("UserInfo", "--Oncreate add 모드 --");
-        }
-        else{
-            Log.i("UserInfo", "--Oncreate 모드 오류입니다--mode:"+mode);
-        }
 
     }
 
@@ -186,7 +187,6 @@ public class UserInfo extends Activity {
                 finish();
             }
         }
-
 
     }
 

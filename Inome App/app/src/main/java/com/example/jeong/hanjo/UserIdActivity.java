@@ -8,30 +8,28 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.example.jeong.hanjo.beaconService.RecoBackgroundMonitoringService;
 import com.example.jeong.hanjo.beaconService.RecoBackgroundRangingService;
-import com.example.jeong.hanjo.utility.HttpHandler;
-
-import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Jeong on 2016-11-18.
  */
 public class UserIdActivity extends Activity {
-    String familyId, familyPw;
+    String userId, userPw;
     TextView beacon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
-        beacon = (TextView)findViewById(R.id.beacon);
+        //beacon = (TextView)findViewById(R.id.beacon);
 
         Intent intent = getIntent();
-        familyId = intent.getStringExtra("id");
-        familyPw = intent.getStringExtra("pw");
+        userId = intent.getStringExtra("id");
+        userPw = intent.getStringExtra("pw");
 
     }
 
@@ -51,12 +49,16 @@ public class UserIdActivity extends Activity {
 
     public void remoteIRDeviceClicked(View v){
         //request IRDevice list
-
         Intent intent = new Intent(UserIdActivity.this, RemoteDeviceActivity.class);
-        intent.putExtra("familyId", familyId);
-        intent.putExtra("familyPw", familyPw);
+        intent.putExtra("userId", userId);
+        intent.putExtra("userPw", userPw);
         startActivity(intent);
 
+    }
+
+    public void logoutClicked(View v){
+        Toast.makeText(UserIdActivity.this, "로그아웃", Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     public void onMonitoringToggleButtonClicked(View v) {
@@ -83,10 +85,6 @@ public class UserIdActivity extends Activity {
         }
     }
 
-    public void logoutClicked(View v){
-
-    }
-
     private boolean isBackgroundMonitoringServiceRunning(Context context) {
         ActivityManager am = (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
         for(ActivityManager.RunningServiceInfo runningService : am.getRunningServices(Integer.MAX_VALUE)) {
@@ -105,19 +103,5 @@ public class UserIdActivity extends Activity {
             }
         }
         return false;
-    }
-
-    public void testClicked2(View v){
-        HttpHandler hp = new HttpHandler();
-        String res = null;
-        try {
-            res = hp.execute("http://192.168.137.28:8080/SWCD-war/webresources/IRservice/remoteControlByUser?userId="+"user1"+"&userPw=user1&deviceName=tv1&userInstruction=up","GET").get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-
-        Log.i("USERidAc", res);
     }
 }

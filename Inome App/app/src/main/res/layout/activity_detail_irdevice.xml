@@ -2,111 +2,179 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#e71a1b21">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="9"
-        android:orientation="vertical">
+        android:layout_weight="8"
+        android:orientation="vertical"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:orientation="horizontal">
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingTop="5dp"
+                android:src="@drawable/point"/>
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="디바이스 이름"
-                android:layout_weight="1"/>
-
+                android:text="이름"
+                android:textColor="#73F0E5"
+                android:textStyle="bold"
+                android:textSize="25dp"
+                android:layout_weight="2"/>
             <TextView
                 android:id="@+id/textView_detail_IRdeviceName"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
+                android:textColor="#73F0E5"
                 android:textSize="25dp"
-                android:layout_weight="1"/>
+                android:layout_weight="3"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:orientation="horizontal">
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingTop="5dp"
+                android:src="@drawable/point"/>
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="주소"
-                android:layout_weight="1"/>
-
+                android:textColor="#73F0E5"
+                android:textStyle="bold"
+                android:textSize="25dp"
+                android:layout_weight="2"/>
             <TextView
                 android:id="@+id/textView_detail_IRdeviceAddress"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
+                android:textColor="#73F0E5"
                 android:textSize="25dp"
-                android:layout_weight="1"/>
+                android:layout_weight="3"/>
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:orientation="horizontal">
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingTop="5dp"
+                android:src="@drawable/point"/>
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="회사"
-                android:layout_weight="1"/>
+                android:textColor="#73F0E5"
+                android:textStyle="bold"
+                android:textSize="25dp"
+                android:layout_weight="2"/>
             <TextView
                 android:id="@+id/textView_detail_company"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
+                android:textColor="#73F0E5"
                 android:textSize="25dp"
-                android:layout_weight="1"/>
+                android:layout_weight="3"/>
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:orientation="horizontal">
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingTop="5dp"
+                android:src="@drawable/point"/>
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="분류"
-                android:layout_weight="1"/>
+                android:textColor="#73F0E5"
+                android:textStyle="bold"
+                android:textSize="25dp"
+                android:layout_weight="2"/>
             <TextView
                 android:id="@+id/textView_detail_classification"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
+                android:textColor="#73F0E5"
                 android:textSize="25dp"
-                android:layout_weight="1"/>
+                android:layout_weight="3"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:orientation="horizontal">
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingTop="5dp"
+                android:src="@drawable/point"/>
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="모델"
-                android:layout_weight="1"/>
+                android:textColor="#73F0E5"
+                android:textStyle="bold"
+                android:textSize="25dp"
+                android:layout_weight="2"/>
             <TextView
                 android:id="@+id/textView_detail_model"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
+                android:textColor="#73F0E5"
                 android:textSize="25dp"
-                android:layout_weight="1"/>
+                android:layout_weight="3"/>
         </LinearLayout>
 
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:orientation="horizontal">
 
-        <Button
+
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="IR디바이스정보수정"
+            android:background="@android:color/transparent"
+            android:paddingTop="20dp"
+            android:src="@drawable/revise_device"
             android:onClick="reviseClicked"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="65dp"
+            android:textSize="15dp"
+            android:text="디바이스정보수정"
+            android:textColor="#73F0E5"/>
     </LinearLayout>
 
 

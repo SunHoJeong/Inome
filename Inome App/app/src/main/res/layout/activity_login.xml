@@ -1,41 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/images">
 
     <EditText
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:id="@+id/editText_id"
-        android:layout_centerHorizontal="true"
-        android:hint="아이디"
-        android:layout_marginTop="151dp" />
+        android:textColor="#e5e8bc"
+        android:textColorHint="#e5e8bc"
+        android:hint="id"
+        android:drawablePadding="30dp"
+        android:drawableLeft ="@drawable/user"
+        android:backgroundTint="#dc7878"
+        android:layout_above="@+id/editText_pw"
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:id="@+id/editText_pw"
-        android:layout_centerHorizontal="true"
-        android:hint="비밀번호"
-        android:layout_below="@+id/editText_id" />
+        android:textColor="#e5e8bc"
+        android:textColorHint="#e5e8bc"
+        android:hint="password"
+        android:drawablePadding="30dp"
+        android:drawableLeft ="@drawable/pasword"
+        android:backgroundTint="@android:color/holo_orange_light"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/editText_id" />
 
-    <Button
-        android:layout_width="150dp"
-        android:layout_height="55dp"
-        android:text="Log in"
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:id="@+id/btn_login"
         android:textAllCaps="false"
         android:onClick="logInClicked"
+        android:background="@android:color/transparent"
+        android:src="@drawable/login"
+        android:layout_marginTop="35dp"
         android:layout_below="@+id/editText_pw"
-        android:layout_toEndOf="@+id/checkBox_login" />
+        android:layout_alignEnd="@+id/editText_pw" />
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="로그인상태유지"
-        android:id="@+id/checkBox_login"
-        android:layout_alignBottom="@+id/btn_login"
-        android:layout_alignStart="@+id/editText_pw" />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -12,7 +12,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -24,6 +23,10 @@ public class MainActivity extends AppCompatActivity {
     RECOBeaconManager 객체 생성 시 사용합니다.*/
     public static final boolean SCAN_RECO_ONLY = true;
     public static final String RECO_UUID = "24DDF411-8CF1-440C-87CD-E368DAF9C93E";
+//    public static final String PROPERTY_REG_ID = "registration_id";
+//    public static final String PROPERTY_APP_VERSION = "appVersion";
+//    static String SENDER_ID = "1033891114261";
+
 
     /* 백그라운드 ranging timeout을 설정합니다.
        true일 경우, 백그라운드에서 입장한 region에서 ranging이 실행 되었을 때, 10초 후 자동으로 정지합니다.
@@ -62,7 +65,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         inputId = (EditText)findViewById(R.id.editText_id);
         inputPw = (EditText)findViewById(R.id.editText_pw);
-        autoLogin = (CheckBox)findViewById(R.id.checkBox_login);
+        //autoLogin = (CheckBox)findViewById(R.id.checkBox_login);
+
+
+
         pref = getSharedPreferences("loginInfo",Activity.MODE_PRIVATE);
         editor = pref.edit();
         editor.putString("userId", "user1");
@@ -93,26 +99,26 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
-        autoLogin.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    String id = inputId.getText().toString();
-                    String pw = inputPw.getText().toString();
-
-                    editor.putString("id", id);
-                    editor.putString("pw", pw);
-                    editor.putBoolean("autoLogin", true);
-                    editor.commit();
-                }else{
-			        editor.remove("id");
-			        editor.remove("pw");
-			        editor.remove("autoLogin");
-                    //editor.clear();
-                    editor.commit();
-                }
-            }
-        });
+//        autoLogin.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if(isChecked){
+//                    String id = inputId.getText().toString();
+//                    String pw = inputPw.getText().toString();
+//
+//                    editor.putString("id", id);
+//                    editor.putString("pw", pw);
+//                    editor.putBoolean("autoLogin", true);
+//                    editor.commit();
+//                }else{
+//			        editor.remove("id");
+//			        editor.remove("pw");
+//			        editor.remove("autoLogin");
+//                    //editor.clear();
+//                    editor.commit();
+//                }
+//            }
+//        });
     }
 
     @Override
@@ -163,6 +169,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
 
     private boolean logInCheck(String id, String pw, int logInMode){
         String mode = null;
@@ -225,10 +232,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void testClicked(View v){
-        Intent intent = new Intent(MainActivity.this, UserIdActivity.class);
-        intent.putExtra("familyId","_id");
-        intent.putExtra("familyPw","_pw");
-        startActivity(intent);
+//        Intent intent = new Intent(MainActivity.this, UserIdActivity.class);
+//        intent.putExtra("familyId","_id");
+//        intent.putExtra("familyPw","_pw");
+//        startActivity(intent);
+        Server.remoteDevice("user1","user1","tv1","up");
+
     }
 
     @Override

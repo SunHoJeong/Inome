@@ -54,7 +54,7 @@ public class IRdeviceListActivity extends Activity {
                 Intent intent = new Intent(IRdeviceListActivity.this, DetailIRdeviceActivity.class);
                 intent.putExtra("familyId", familyId);
                 intent.putExtra("familyPw", familyPw);
-                intent.putExtra("ResponseIRDevice", item);
+                intent.putExtra("deviceInfo", item);
 
                 startActivity(intent);
             }

@@ -40,6 +40,7 @@ public class IRDeviceInfo extends Activity {
     boolean flag_com = false;
     boolean flag_class = false;
     boolean flag_model = false;
+    Intent intent;
 
 
     @Override
@@ -47,30 +48,46 @@ public class IRDeviceInfo extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_irdeviceinfo);
 
-        Intent intent = getIntent();
-        mode = intent.getIntExtra("mode", 0);
-        familyId = intent.getStringExtra("familyId");
-        familyPw = intent.getStringExtra("familyPw");
-        resDevInfo = (ResponseIRDevice)intent.getSerializableExtra("ResponseIRDevice");
+
 
         holder = new ViewHolder();
         holder.editText_IRname = (EditText)findViewById(R.id.editText_IRdeviceInfo_name);
         holder.editText_Address = (EditText)findViewById(R.id.editText_IRdeviceInfo_address);
-        holder.spinner_company = (Spinner)findViewById(R.id.spinner_company);
-        final ArrayList<String> comList = getComList();
 
-        adapter_company = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, comList);
+        intent = getIntent();
+        mode = intent.getIntExtra("mode", 0);
+        familyId = intent.getStringExtra("familyId");
+        familyPw = intent.getStringExtra("familyPw");
+        if(mode == MainActivity.MODE_REVISE){
+            resDevInfo = (ResponseIRDevice)intent.getSerializableExtra("deviceInfo");
+            beforeName = resDevInfo.getName();
+            holder.editText_IRname.setText(resDevInfo.getName());
+            holder.editText_Address.setText(resDevInfo.getAddress());
+
+            Log.i("IRdeviceInfo", "--Oncreate revise 모드 --");
+        }
+        else if(mode == MainActivity.MODE_ADD){
+            beforeName = null;
+            Log.i("IRdeviceInfo", "--Oncreate add 모드 --");
+        }
+        else{
+            Log.i("IRdeviceInfo", "--Oncreate모드오류 --");
+        }
+
+        holder.spinner_company = (Spinner)findViewById(R.id.spinner_company);
+        ArrayList<String> comList = getComList();
+
+        adapter_company = new ArrayAdapter<String>(this, R.layout.spinner_item, comList);
         holder.spinner_company.setAdapter(adapter_company);
         holder.spinner_company.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position == 0){
-                    position_company = position;
+                    input_company = null;
                     flag_com = false;
                 }
                 else{
-                    position_company = position;
-                    input_company = comList.get(position);
+                    input_company = parent.getItemAtPosition(position).toString();
                     flag_com = true;
 
                     Log.i("SPINNER", input_company+" id:"+id);
@@ -86,8 +103,8 @@ public class IRDeviceInfo extends Activity {
         holder.spinner_classification = (Spinner)findViewById(R.id.spinner_classification);
         //final ArrayList<String> classList = getClassList(familyId, familyPw);
 
-        String[] str_class = {"선택해주세요","tv","aircon","heater"};
-        adapter_class = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, str_class);
+        String[] str_class = {"선택해주세요","tv","aircon"};
+        adapter_class = new ArrayAdapter<String>(this, R.layout.spinner_item, str_class);
         holder.spinner_classification.setAdapter(adapter_class);
         holder.spinner_classification.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -97,7 +114,6 @@ public class IRDeviceInfo extends Activity {
                     flag_class = false;
                 }
                 else{
-                    //input_classification = str_class[position];
                     input_classification = parent.getItemAtPosition(position).toString();
                     flag_class = true;
                     Log.i("SPINNER", input_classification+" id:"+id);
@@ -111,8 +127,8 @@ public class IRDeviceInfo extends Activity {
         });
 
         holder.spinner_model = (Spinner)findViewById(R.id.spinner_model);
-        final String[] str_model = {"선택해주세요","55555555","66666666"};
-        adapter_model = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, str_model);
+        String[] str_model = {"선택해주세요","55555555","66666666"};
+        adapter_model = new ArrayAdapter<String>(this, R.layout.spinner_item, str_model);
         holder.spinner_model.setAdapter(adapter_model);
         holder.spinner_model.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -122,7 +138,7 @@ public class IRDeviceInfo extends Activity {
                     flag_model = false;
                 }
                 else{
-                    input_model = str_model[position];
+                    input_model = parent.getItemAtPosition(position).toString();
                     flag_model = true;
                     Log.i("SPINNER", input_model+" id:"+id);
                 }
@@ -134,21 +150,6 @@ public class IRDeviceInfo extends Activity {
             }
         });
 
-
-        if(mode == MainActivity.MODE_REVISE){
-            beforeName = resDevInfo.getName();
-            holder.editText_IRname.setText(resDevInfo.getName());
-            holder.editText_IRname.setText(resDevInfo.getAdress());
-
-            Log.i("IRdeviceInfo", "--Oncreate revise 모드 --");
-        }
-        else if(mode == MainActivity.MODE_ADD){
-            beforeName = null;
-            Log.i("IRdeviceInfo", "--Oncreate add 모드 --");
-        }
-        else{
-            Log.i("IRdeviceInfo", "--Oncreate모드오류 --");
-        }
 
     }
 
@@ -164,20 +165,21 @@ public class IRDeviceInfo extends Activity {
         name = holder.editText_IRname.getText().toString();
         address = holder.editText_Address.getText().toString();
         //TODO:어떤방식으로할지? 결정하기 1.adapter 2.input_string
-        company = adapter_company.getItem(position_company);
+        //company = adapter_company.getItem(position_company);
+        company = input_company;
         classification = input_classification;
         model = input_model;
 
         Log.i("--CHECK--",name+"/"+address+"/"+company+"/"+classification+"/"+model);
 
         reqDevInfo = new RequestIRDevice(familyId, familyPw, beforeName, company, classification, model, name, address);
-        Log.i("--DevInfo--",reqDevInfo.getFamilyId()+" "+reqDevInfo.getFamilyPw()+" "+reqDevInfo.getOldDeviceName()+" "+reqDevInfo.getNewDeviceAddress()
+        Log.i("--DevInfo--",reqDevInfo.getFamilyId()+" "+reqDevInfo.getFamilyPw()+" "+reqDevInfo.getOldDeviceName()+" "+reqDevInfo.getNewDeviceName()+" "+reqDevInfo.getNewDeviceAddress()
         +" "+reqDevInfo.getNewDeviceModel()+" "+reqDevInfo.getNewDeviceCompany()+" "+reqDevInfo.getNewDeviceClassification());
 
         if(mode == MainActivity.MODE_REVISE){
             //url = "http://192.168.137.28:8080/SWCD-war/webresources/IRservice/reviseOneDeviceByFamily";
             uri = Server.uriMaker(Server.METHOD_reviseIRdeviceInfo);
-            resDevInfo.setName(name);
+//            resDevInfo.setName(name);
 
             Gson gson = new Gson();
             String json = gson.toJson(reqDevInfo);
@@ -192,12 +194,23 @@ public class IRDeviceInfo extends Activity {
             }
 
             if(res.equals("\"success\"")){
-                finish();
+                resDevInfo.setName(name);
+                resDevInfo.setAddress(address);
+                resDevInfo.setCompany(company);
+                resDevInfo.setClassification(classification);
+                resDevInfo.setModel(model);
+
+                intent.putExtra("update", resDevInfo);
+                setResult(RESULT_OK, intent);
+                Toast.makeText(IRDeviceInfo.this, res, Toast.LENGTH_SHORT).show();
                 Log.i("--IRDeviceInfo--", "success");
+                finish();
+
             }
             else{
-                finish();
+                Toast.makeText(IRDeviceInfo.this, res, Toast.LENGTH_SHORT).show();
                 Log.i("--IRDeviceInfo--", "failed");
+                finish();
             }
             //resUserInfo.setName(name);
         }
@@ -217,12 +230,14 @@ public class IRDeviceInfo extends Activity {
             }
 
             if(res.equals("\"success\"")){
-                finish();
+                Toast.makeText(IRDeviceInfo.this, res, Toast.LENGTH_SHORT).show();
                 Log.i("--IRDeviceInfo--", "success");
+                finish();
             }
             else{
-                finish();
+                Toast.makeText(IRDeviceInfo.this, res, Toast.LENGTH_SHORT).show();
                 Log.i("--IRDeviceInfo--", "failed");
+                finish();
             }
         }
 

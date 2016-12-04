@@ -9,9 +9,17 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-feature android:name="android.hardware.bluetooth_le" android:required="true" />
 
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <permission android:name="com.icelancer.androidgcmclient.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="com.icelancer.androidgcmclient.permission.C2D_MESSAGE" />
+
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/app_icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -49,7 +57,10 @@
             android:name=".IRdeviceListActivity"/>
         <activity
             android:name=".RemoteDeviceActivity"/>
-
+        <activity
+            android:name=".LogActivity"/>
+        <activity 
+            android:name=".RemoconTvActivity"/>
 
         <service android:name="com.perples.recosdk.RECOBeaconService" />
         <service android:name=".beaconService.RecoBackgroundMonitoringService" />

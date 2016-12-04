@@ -2,22 +2,31 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#e71a1b21">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
-        android:layout_weight="9">
+        android:layout_weight="8"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp">
 
         <TextView
             android:id="@+id/textView_familyInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="30dp" />
+            android:textStyle="bold"
+            android:text="가족 구성원 목록"
+            android:textColor="#73F0E5"
+            android:textSize="25dp" />
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingTop="20dp"
             android:fillViewport="true">
 
             <ListView
@@ -34,13 +43,23 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="horizontal"
-        android:layout_weight="1">
+        android:layout_weight="2">
 
-        <Button
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="구성원 추가"
+            android:paddingTop="25dp"
+            android:src="@drawable/add_member"
+            android:background="@android:color/transparent"
             android:onClick="addUserClicked"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="60dp"
+            android:textSize="15dp"
+            android:text="구성원추가"
+            android:textColor="#73F0E5"/>
+
     </LinearLayout>
 
 

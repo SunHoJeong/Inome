@@ -3,6 +3,7 @@ package com.example.jeong.hanjo;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,7 +28,7 @@ public class DetailIRdeviceActivity extends Activity{
         Intent intent = getIntent();
         familyId = intent.getStringExtra("familyId");
         familyPw = intent.getStringExtra("familyPw");
-        dev = (ResponseIRDevice)intent.getSerializableExtra("ResponseIRDevice");
+        dev = (ResponseIRDevice)intent.getSerializableExtra("deviceInfo");
 
         holder = new ViewHolder();
         holder.textView_name = (TextView)findViewById(R.id.textView_detail_IRdeviceName);
@@ -37,7 +38,8 @@ public class DetailIRdeviceActivity extends Activity{
         holder.textView_model = (TextView)findViewById(R.id.textView_detail_model);
 
         holder.textView_name.setText(dev.getName());
-        holder.textView_address.setText(dev.getAdress());
+        Log.d("--DetailIDdeviceAC--", dev.getAddress());
+        holder.textView_address.setText(dev.getAddress());
         holder.textView_company.setText(dev.getCompany());
         holder.textView_classification.setText(dev.getClassification());
         holder.textView_model.setText(dev.getModel());
@@ -56,7 +58,7 @@ public class DetailIRdeviceActivity extends Activity{
         intent.putExtra("familyId", familyId);
         intent.putExtra("familyPw", familyPw);
         intent.putExtra("mode", MainActivity.MODE_REVISE);
-        intent.putExtra("ResponseIRDevice", dev);
+        intent.putExtra("deviceInfo", dev);
         startActivityForResult(intent, 2);
     }
 
@@ -68,7 +70,7 @@ public class DetailIRdeviceActivity extends Activity{
             ResponseIRDevice updatedDeviceInfo = (ResponseIRDevice)intent.getSerializableExtra("update");
             dev = updatedDeviceInfo;
             holder.textView_name.setText(updatedDeviceInfo.getName());
-            holder.textView_address.setText(updatedDeviceInfo.getAdress());
+            holder.textView_address.setText(updatedDeviceInfo.getAddress());
             holder.textView_company.setText(updatedDeviceInfo.getCompany());
             holder.textView_classification.setText(updatedDeviceInfo.getClassification());
             holder.textView_model.setText(updatedDeviceInfo.getModel());

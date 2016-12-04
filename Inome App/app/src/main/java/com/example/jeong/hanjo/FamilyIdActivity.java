@@ -25,8 +25,7 @@ public class FamilyIdActivity extends Activity {
         familyId = intent.getStringExtra("familyId"); //family id
         familyPw = intent.getStringExtra("familyPw"); //family pw
 
-        textView_familyInfo = (TextView) findViewById(R.id.textView_familyInfo);
-        textView_familyInfo.setText(familyId);
+
     }
 
     @Override
@@ -58,8 +57,12 @@ public class FamilyIdActivity extends Activity {
     }
 
     public void showLogClicked(View v){
-        //TODO: 도어락 로그 구현
         Toast.makeText(FamilyIdActivity.this,"도어락로그",Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(FamilyIdActivity.this, LogActivity.class);
+        intent.putExtra("familyId", familyId);
+        intent.putExtra("familyPw", familyPw);
+        startActivity(intent);
     }
 
     public void logoutClicked(View v){

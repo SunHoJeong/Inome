@@ -25,9 +25,11 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'com.android.support:design:23.3.0'
+    compile 'com.google.firebase:firebase-messaging:9.6.1'
+    compile 'com.google.android.gms:play-services-gcm:9.6.1'
     compile project(':reco-sdk-android')
     compile project(':gson-2.2.4')
     compile project(':gson-2.2.4-javadoc')
     compile project(':gson-2.2.4-sources')
-
 }
+apply plugin: 'com.google.gms.google-services'

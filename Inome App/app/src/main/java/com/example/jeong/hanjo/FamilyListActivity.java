@@ -36,7 +36,7 @@ public class FamilyListActivity extends Activity {
         Intent intent = getIntent();
         familyId = intent.getStringExtra("familyId");
         familyPw = intent.getStringExtra("familyPw");
-        textView_familyInfo.setText("가족ID:"+familyId+"/가족PW:"+familyPw);
+        textView_familyInfo.setText("가족 구성원 목록   가족ID:"+familyId);
     }
 
     @Override

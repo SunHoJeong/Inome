@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1033891114261",
+    "firebase_url": "https://inome-151404.firebaseio.com",
+    "project_id": "inome-151404",
+    "storage_bucket": "inome-151404.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1033891114261:android:dcb9dbe767198801",
+        "android_client_info": {
+          "package_name": "com.example.jeong.hanjo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1033891114261-vee3dg1q6b8f03km0m1k4i2dms8tp303.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFSelLlN386M5pNxviPO-LMTVIH0JBS2U"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

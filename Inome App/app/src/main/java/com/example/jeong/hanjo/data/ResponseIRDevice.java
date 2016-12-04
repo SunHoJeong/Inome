@@ -11,14 +11,14 @@ public class ResponseIRDevice implements Serializable{
     String name;
     String model;
     String company;
-    String adress;
+    String address;
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String adress) {
+        this.address = adress;
     }
 
     public String getClassification() {

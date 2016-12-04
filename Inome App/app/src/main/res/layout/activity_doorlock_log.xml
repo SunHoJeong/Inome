@@ -7,42 +7,31 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_weight="8"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp">
-
-
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Device 목록"
+            android:text="도어락 로그 목록"
             android:textSize="30dp"
+            android:textStyle="bold"
             android:textColor="#73F0E5"/>
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_marginTop="15dp">
+            android:fillViewport="true">
 
-            <ScrollView
+            <ListView
+                android:id="@+id/listView_doorlock_log"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fillViewport="true">
-
-                <ListView
-                    android:id="@+id/listView_remote_IRdevice"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                </ListView>
-            </ScrollView>
-
-        </LinearLayout>
-
+                android:layout_height="match_parent">
+            </ListView>
+        </ScrollView>
     </LinearLayout>
 
 </LinearLayout>

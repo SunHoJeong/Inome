@@ -1,4 +1,4 @@
-package com.example.jeong.hanjo;
+package com.example.jeong.hanjo.data;
 
 /**
  * Created by Jeong on 2016-11-23.
@@ -8,6 +8,12 @@ public class DoorlockLog {
     String id; //user_id
     String date;
     String time;
+
+    public DoorlockLog(String id, String date, String time) {
+        this.id = id;
+        this.date = date;
+        this.time = time;
+    }
 
     public String getDate() {
         return date;
