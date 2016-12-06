@@ -36,6 +36,8 @@
                     android:layout_height="wrap_content"
                     android:text="채널"
                     android:textSize="25dp"
+                    android:paddingLeft="6dp"
+                    android:layout_gravity="bottom"
                     android:textColor="#73F0E5"/>
             </LinearLayout>
             <LinearLayout
@@ -46,6 +48,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="음량"
+                    android:layout_gravity="bottom"
+                    android:paddingLeft="6dp"
                     android:textSize="25dp"
                     android:textColor="#73F0E5"/>
             </LinearLayout>
@@ -67,6 +71,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
+                    android:onClick="btn_tv_onClicked"
                     android:src="@drawable/tv_on"/>
             </LinearLayout>
             <LinearLayout
@@ -84,6 +89,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
+                    android:onClick="btn_tv_ch_upClicked"
                     android:src="@drawable/tv_up"/>
             </LinearLayout>
             <LinearLayout
@@ -95,6 +101,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
+                    android:onClick="btn_tv_vol_upClicked"
                     android:src="@drawable/tv_up"/>
             </LinearLayout>
 
@@ -126,6 +133,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
+                    android:onClick="btn_tv_ch_downClicked"
                     android:src="@drawable/tv_down"/>
             </LinearLayout>
             <LinearLayout
@@ -137,6 +145,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
+                    android:onClick="btn_tv_vol_downClicked"
                     android:src="@drawable/tv_down"/>
             </LinearLayout>
 
@@ -155,16 +164,31 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
+                    android:onClick="btn_tv_1Clicked"
                     android:src="@drawable/tv_1"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"></LinearLayout>
+                android:layout_weight="1">
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:onClick="btn_tv_2Clicked"
+                    android:src="@drawable/tv_2"/>
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"></LinearLayout>
+                android:layout_weight="1">
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:onClick="btn_tv_3Clicked"
+                    android:src="@drawable/tv_3"/>
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -175,15 +199,36 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"></LinearLayout>
+                android:layout_weight="1">
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:onClick="btn_tv_4Clicked"
+                    android:src="@drawable/tv_4"/>
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"></LinearLayout>
+                android:layout_weight="1">
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:onClick="btn_tv_5Clicked"
+                    android:src="@drawable/tv_5"/>
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"></LinearLayout>
+                android:layout_weight="1">
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:onClick="btn_tv_6Clicked"
+                    android:src="@drawable/tv_6"/>
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -193,15 +238,36 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"></LinearLayout>
+                android:layout_weight="1">
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:onClick="btn_tv_7Clicked"
+                    android:src="@drawable/tv_7"/>
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"></LinearLayout>
+                android:layout_weight="1">
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:onClick="btn_tv_8Clicked"
+                    android:src="@drawable/tv_8"/>
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"></LinearLayout>
+                android:layout_weight="1">
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:onClick="btn_tv_9Clicked"
+                    android:src="@drawable/tv_9"/>
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -221,6 +287,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
+                    android:onClick="btn_tv_0Clicked"
                     android:src="@drawable/tv_0"/>
             </LinearLayout>
             <LinearLayout

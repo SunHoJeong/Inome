@@ -16,7 +16,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.jeong.hanjo.utility.BluetoothService;
+import com.example.jeong.hanjo.utility.HttpHandler;
 import com.example.jeong.hanjo.utility.Server;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
+
+import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
     /* true일 경우 레코 비콘만 스캔하며, false일 경우 모든 비콘을 스캔합니다.
@@ -26,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
 //    public static final String PROPERTY_REG_ID = "registration_id";
 //    public static final String PROPERTY_APP_VERSION = "appVersion";
 //    static String SENDER_ID = "1033891114261";
+
 
 
     /* 백그라운드 ranging timeout을 설정합니다.
@@ -59,90 +65,47 @@ public class MainActivity extends AppCompatActivity {
         }
 
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         inputId = (EditText)findViewById(R.id.editText_id);
         inputPw = (EditText)findViewById(R.id.editText_pw);
+
+        FirebaseMessaging.getInstance().subscribeToTopic("news");
+        FirebaseInstanceId.getInstance().getToken();
+
         //autoLogin = (CheckBox)findViewById(R.id.checkBox_login);
 
-
-
-        pref = getSharedPreferences("loginInfo",Activity.MODE_PRIVATE);
-        editor = pref.edit();
-        editor.putString("userId", "user1");
-        editor.putString("userPw", "user1");
-        editor.putString("familyId", "_id");
-        editor.putString("familyPw","_pw");
-        editor.commit();
-
-        if(pref.getBoolean("autoLogin", false)){
-            inputId.setText(pref.getString("id", ""));
-            inputPw.setText(pref.getString("pw", ""));
-            autoLogin.setChecked(true);
-        }
-
-//        if(btService == null) {
-//            btService = new BluetoothService(this, mHandler);
-//        }
-
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
 //
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
+//        pref = getSharedPreferences("loginInfo",Activity.MODE_PRIVATE);
+//        editor = pref.edit();
+//        editor.putString("userId", "user1");
+//        editor.putString("userPw", "user1");
+//        editor.putString("familyId", "_id");
+//        editor.putString("familyPw","_pw");
+//        editor.commit();
 
-//        autoLogin.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                if(isChecked){
-//                    String id = inputId.getText().toString();
-//                    String pw = inputPw.getText().toString();
-//
-//                    editor.putString("id", id);
-//                    editor.putString("pw", pw);
-//                    editor.putBoolean("autoLogin", true);
-//                    editor.commit();
-//                }else{
-//			        editor.remove("id");
-//			        editor.remove("pw");
-//			        editor.remove("autoLogin");
-//                    //editor.clear();
-//                    editor.commit();
-//                }
-//            }
-//        });
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
     }
 
-//    public void signUpClicked(View v){
-//        //signUp button clicked
-//        String temp1 = inputId.getText().toString();
-//        String temp2 = inputPw.getText().toString();
-//
-//        editor.putString("id", temp1);
-//        editor.putString("pw", temp2);
-//        editor.commit();
-//    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
 
     public void logInClicked(View v){// clicked login button
 
         String id = inputId.getText().toString();
         String pw = inputPw.getText().toString();
         String res = null;
-        int mode = 0;
+
 
         res = Server.login(id, pw);
         if(res.equals("\"family\"")){
@@ -171,30 +134,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private boolean logInCheck(String id, String pw, int logInMode){
-        String mode = null;
-        if(logInMode == MODE_USER){
-            mode = "user";
-        }
-        else{
-            mode = "family";
-        }
-
-        if(pref.getString(mode+"Id","").equals(id) && pref.getString(mode+"Pw","").equals(pw)) {
-            // login success
-
-            Toast.makeText(MainActivity.this, mode+"로그인 성공", Toast.LENGTH_LONG).show();
-            return true;
-        } else if (pref.getString(mode+"Id","").equals(null)){
-            // sign in first
-            Toast.makeText(MainActivity.this, "먼저 등록을 해주세요", Toast.LENGTH_LONG).show();
-            return false;
-        } else {
-            // login failed
-            Toast.makeText(MainActivity.this, mode+"로그인 실패"+id+"/"+pref.getString(mode+"Id","")+"///"+pw+"/"+pref.getString(mode+"Pw",""), Toast.LENGTH_LONG).show();
-            return false;
-        }
-    }
+//    private boolean logInCheck(String id, String pw, int logInMode){
+//        String mode = null;
+//        if(logInMode == MODE_USER){
+//            mode = "user";
+//        }
+//        else{
+//            mode = "family";
+//        }
+//
+//        if(pref.getString(mode+"Id","").equals(id) && pref.getString(mode+"Pw","").equals(pw)) {
+//            // login success
+//
+//            Toast.makeText(MainActivity.this, mode+"로그인 성공", Toast.LENGTH_LONG).show();
+//            return true;
+//        } else if (pref.getString(mode+"Id","").equals(null)){
+//            // sign in first
+//            Toast.makeText(MainActivity.this, "먼저 등록을 해주세요", Toast.LENGTH_LONG).show();
+//            return false;
+//        } else {
+//            // login failed
+//            Toast.makeText(MainActivity.this, mode+"로그인 실패"+id+"/"+pref.getString(mode+"Id","")+"///"+pw+"/"+pref.getString(mode+"Pw",""), Toast.LENGTH_LONG).show();
+//            return false;
+//        }
+//    }
 
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -231,15 +194,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void testClicked(View v){
-//        Intent intent = new Intent(MainActivity.this, UserIdActivity.class);
-//        intent.putExtra("familyId","_id");
-//        intent.putExtra("familyPw","_pw");
-//        startActivity(intent);
-        Server.remoteDevice("user1","user1","tv1","up");
-
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -260,6 +214,22 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void addClicked(View v){
+        HttpHandler hp = new HttpHandler();
+        String result = null;
+        String uri = Server.uriMaker(Server.METHOD_addIRcode, "hanjo", "hanjo");
+        //Log.d("--Main--", result);
+
+        try {
+            result = hp.execute(uri,"GET").get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

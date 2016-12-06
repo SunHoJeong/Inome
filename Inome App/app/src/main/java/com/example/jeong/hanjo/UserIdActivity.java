@@ -78,6 +78,8 @@ public class UserIdActivity extends Activity {
         if(toggle.isChecked()) {
             Log.i("MainActivity", "onRangingToggleButtonClicked off to on");
             Intent intent = new Intent(this, RecoBackgroundRangingService.class);
+            intent.putExtra("userId",userId);
+            intent.putExtra("userPw",userPw);
             startService(intent);
         } else {
             Log.i("MainActivity", "onRangingToggleButtonClicked on to off");

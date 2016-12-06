@@ -50,11 +50,19 @@ public class RemoteDeviceActivity extends Activity {
 
                 if(item.getClassification().equals("tv")){
                     Intent intent = new Intent(RemoteDeviceActivity.this, RemoconTvActivity.class);
+                    intent.putExtra("userId",userId);
+                    intent.putExtra("userPw",userPw);
+                    intent.putExtra("devInfo", item);
                     startActivity(intent);
                     //on, off  채널 위, 아래  볼륨 위, 아래
                 }
-                else if(item.getClassification().equals("aircon")){
+                else if(item.getClassification().equals("aircondition")){
                     //on, off 온도 위, 아래  풍향 위, 아래
+                    Intent intent = new Intent(RemoteDeviceActivity.this, RemoconAirconActivity.class);
+                    intent.putExtra("userId",userId);
+                    intent.putExtra("userPw",userPw);
+                    intent.putExtra("devInfo", item);
+                    startActivity(intent);
                 }
                 //해당 아이템의 객체를 얻음 -> classification으로!
                 //객체에서 분류에 따른 UI를 열어줌

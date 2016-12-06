@@ -103,7 +103,7 @@ public class IRDeviceInfo extends Activity {
         holder.spinner_classification = (Spinner)findViewById(R.id.spinner_classification);
         //final ArrayList<String> classList = getClassList(familyId, familyPw);
 
-        String[] str_class = {"선택해주세요","tv","aircon"};
+        String[] str_class = {"선택해주세요","tv","aircondition"};
         adapter_class = new ArrayAdapter<String>(this, R.layout.spinner_item, str_class);
         holder.spinner_classification.setAdapter(adapter_class);
         holder.spinner_classification.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -255,7 +255,7 @@ public class IRDeviceInfo extends Activity {
         String result = null;
         HttpHandler hp = new HttpHandler();
         try {
-            result = hp.execute("http://192.168.137.28:8080/SWCD-war/webresources/IRservice/getAllDeviceCompanyByFamily?familyId="+familyId+"&familyPw="+familyPw, "GET").get();
+            result = hp.execute("http://192.168.137.14:8080/SWCD-war/webresources/IRservice/getAllDeviceCompanyByFamily?familyId="+familyId+"&familyPw="+familyPw, "GET").get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -265,7 +265,7 @@ public class IRDeviceInfo extends Activity {
         String[] comList = gson.fromJson(result, String[].class);
         List<String> temp = Arrays.asList(comList);
         ArrayList<String> list = new ArrayList<String>(temp);
-        list.add(0,"바보바보");
+        list.add(0,"선택해주세요");
 
         return list;
     }
@@ -274,7 +274,7 @@ public class IRDeviceInfo extends Activity {
         String result = null;
         HttpHandler hp = new HttpHandler();
         try {
-            result = hp.execute("http://192.168.137.28:8080/SWCD-war/webresources/IRservice/getAllDeviceClassification?" +
+            result = hp.execute("http://192.168.137.14:8080/SWCD-war/webresources/IRservice/getAllDeviceClassification?" +
                     "familyId="+familyId+"&familyPw="+familyPw+"&company="+company, "GET").get();
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -285,7 +285,6 @@ public class IRDeviceInfo extends Activity {
         String[] comList = gson.fromJson(result, String[].class);
         List<String> temp = Arrays.asList(comList);
         ArrayList<String> list = new ArrayList<String>(temp);
-        list.add(0,"바보바보");
 
         return list;
 

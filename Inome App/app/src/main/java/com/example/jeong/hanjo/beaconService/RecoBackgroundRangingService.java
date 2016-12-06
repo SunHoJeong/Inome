@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.jeong.hanjo.MainActivity;
 import com.example.jeong.hanjo.R;
+import com.example.jeong.hanjo.utility.Server;
 import com.perples.recosdk.RECOBeacon;
 import com.perples.recosdk.RECOBeaconManager;
 import com.perples.recosdk.RECOBeaconRegion;
@@ -35,11 +36,12 @@ public class RecoBackgroundRangingService extends Service implements RECORanging
      */
     private long mScanDuration = 1*1000L;
     private long mSleepDuration = 10*1000L;
-    private long mRegionExpirationTime = 10*1000L;
+    private long mRegionExpirationTime = 3*1000L;
     private int mNotificationID = 9999;
 
     private RECOBeaconManager mRecoManager;
     private ArrayList<RECOBeaconRegion> mRegions;
+    String userId, userPw;
 
     @Override
     public void onCreate() {
@@ -56,6 +58,8 @@ public class RecoBackgroundRangingService extends Service implements RECORanging
          * 		mRecoManager = RECOBeaconManager.getInstance(getApplicationContext(), true, false);
          * 주의: enableRangingTimeout을 false로 설정 시, 배터리 소모량이 증가합니다.
          */
+        userId = intent.getStringExtra("userId");
+        userPw = intent.getStringExtra("userPw");
         mRecoManager = RECOBeaconManager.getInstance(getApplicationContext(), MainActivity.SCAN_RECO_ONLY, MainActivity.ENABLE_BACKGROUND_RANGING_TIMEOUT);
         //mRecoManager = RECOBeaconManager.getInstance(getApplicationContext(), MainActivity.SCAN_RECO_ONLY, false);
         this.bindRECOService();
@@ -90,13 +94,20 @@ public class RecoBackgroundRangingService extends Service implements RECORanging
         Log.i("BackRangingService", "generateBeaconRegion()");
 
         //RECOBeaconRegion recoRegion;
-        RECOBeaconRegion reco1;
+        RECOBeaconRegion reco1,reco2, reco3;
 
         //recoRegion = new RECOBeaconRegion(MainActivity.RECO_UUID, "Inome Beacon"); //major 501, minor 1,2,3
-        reco1 = new RECOBeaconRegion(MainActivity.RECO_UUID, 501, 2, "Inome");
+        reco1 = new RECOBeaconRegion(MainActivity.RECO_UUID, "Inome");
+        //reco2 = new RECOBeaconRegion(MainActivity.RECO_UUID, 501, 2, "Inome");
+        //reco3 = new RECOBeaconRegion(MainActivity.RECO_UUID, 501, 3, "Inome");
+
 
         reco1.setRegionExpirationTimeMillis(this.mRegionExpirationTime);//Region 근방에서 멀어졌을 때, 해당 시간 안에 다시 가까워질 경우 didExitRegion 메소드를 호출하지 않습니다.
+        //reco2.setRegionExpirationTimeMillis(this.mRegionExpirationTime);
+        //reco2.setRegionExpirationTimeMillis(this.mRegionExpirationTime);
         mRegions.add(reco1);
+        //mRegions.add(reco2);
+        //mRegions.add(reco3);
     }
 
     private void startMonitoring() {
@@ -192,7 +203,7 @@ public class RecoBackgroundRangingService extends Service implements RECORanging
 
     @Override
     public void didDetermineStateForRegion(RECOBeaconRegionState state, RECOBeaconRegion region) {
-        Log.i("BackRangingService", "--didDetermineStateForRegion()//region의 경계 통과 state: "+state.toString());
+        Log.i("BackRangingService", "--didDetermineStateForRegion()//region의 경계 통과 state: " + state.toString());
         Toast.makeText(RecoBackgroundRangingService.this, "didDeterminStateForReion", Toast.LENGTH_SHORT).show();
         //Write the code when the state of the monitored region is changed
     }
@@ -207,6 +218,8 @@ public class RecoBackgroundRangingService extends Service implements RECORanging
          * didDetermineStateForRegion() 콜백 메소드를 통해 region 상태를 확인할 수 있습니다.
          */
         Toast.makeText(RecoBackgroundRangingService.this, "EnterRegion", Toast.LENGTH_SHORT).show();
+        String result = Server.doorlockOpen(userId, userPw);
+
         //Get the region and found beacon list in the entered region
         Log.i("BackRangingService", "didEnterRegion() - " + region.getUniqueIdentifier());
         this.popupNotification("Inside of " + region.getUniqueIdentifier());
@@ -247,9 +260,20 @@ public class RecoBackgroundRangingService extends Service implements RECORanging
     @Override
     public void didRangeBeaconsInRegion(Collection<RECOBeacon> beacons, RECOBeaconRegion region) {
         Log.i("BackRangingService", "---didRangeBeaconsInRegion() - " + region.getUniqueIdentifier() + " with " + beacons.size() + " beacons");
-        for(RECOBeacon beacon : beacons){
-            //Toast.makeText(RecoBackgroundRangingService.this, "beacon:"+beacon.getAccuracy(), Toast.LENGTH_SHORT).show();
-        }
+//        for(RECOBeacon beacon : beacons){
+//            //Toast.makeText(RecoBackgroundRangingService.this, "beacon:"+beacon.getAccuracy(), Toast.LENGTH_SHORT).show();
+//            if(beacon.getMinor() ==2 && beacon.getAccuracy() < 5){
+//                String result = Server.doorlockOpen(userId, userPw);
+//                Log.d("--BEACON--", result);
+//            }
+//            else{
+//                if(beacon.getMinor() ==2){
+//                    Toast.makeText(RecoBackgroundRangingService.this, ""+beacon.getAccuracy(), Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        }
+
+
         //Write the code when the beacons inside of the region is received
     }
 

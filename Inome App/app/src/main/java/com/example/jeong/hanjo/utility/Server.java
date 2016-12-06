@@ -27,6 +27,8 @@ public class Server {
     public static final int METHOD_showRemoteInfo = 8;
     public static final int METHOD_showLogInfo = 9;
     public static final int METHOD_remoteDevice = 10;
+    public static final int METHOD_doorlockOpen = 11;
+    public static final int METHOD_addIRcode = 12;
     //remoteIRdevice
     //userAc, showIRdevicelist
     //getComList
@@ -181,8 +183,24 @@ public class Server {
         return result;
     }
 
+    public static String doorlockOpen(String userId, String userPw){
+        HttpHandler hp = new HttpHandler();
+        String result = null;
+        String uri = uriMaker(METHOD_doorlockOpen, userId, userPw);
+
+        try {
+            result = hp.execute(uri,"GET").get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
     public static String uriMaker(int mode, String id, String pw){
-        Uri.Builder baseUri = Uri.parse("http://192.168.137.28:8080/SWCD-war").buildUpon();
+        Uri.Builder baseUri = Uri.parse("http://192.168.137.14:8080/SWCD-war").buildUpon();
         String makedUri = null;
         switch (mode){
             case METHOD_login: //GET: id, pw
@@ -208,13 +226,22 @@ public class Server {
             case METHOD_remoteDevice:
                 makedUri = baseUri.appendPath("webresources").appendPath("IRservice").appendPath("remoteControlByUser")
                         .appendQueryParameter("userId",id).appendQueryParameter("userPw",pw).build().toString();
+                break;
+            case METHOD_doorlockOpen:
+                makedUri = baseUri.appendPath("webresources").appendPath("IRservice").appendPath("doorlockOpenByUser")
+                        .appendQueryParameter("userId",id).appendQueryParameter("userPw",pw).build().toString();
+                break;
+            case METHOD_addIRcode:
+                makedUri = baseUri.appendPath("webresources").appendPath("IRservice").appendPath("addIRInstructionByFamily")
+                        .appendQueryParameter("familyId",id).appendQueryParameter("familyPw",pw).appendQueryParameter("deviceName","팔달관에어컨")
+                        .appendQueryParameter("userInstruction","Aircondition_Temp-").build().toString();
 
         }
         return makedUri;
     }
 
     public static String uriMaker(int mode){
-        Uri.Builder baseUri = Uri.parse("http://192.168.137.28:8080/SWCD-war").buildUpon();
+        Uri.Builder baseUri = Uri.parse("http://192.168.137.14:8080/SWCD-war").buildUpon();
         String makedUri = null;
 
         switch(mode){
