@@ -198,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
     public void addClicked(View v){
         HttpHandler hp = new HttpHandler();
         String result = null;
-        String uri = Server.uriMaker(Server.METHOD_addIRcode, "hanjo", "hanjo");
+        String uri = Server.uriMaker(Server.METHOD_addIRcode, "hanjo", "hanjo", "팔달관에어컨");
         //Log.d("--Main--", result);
 
         try {

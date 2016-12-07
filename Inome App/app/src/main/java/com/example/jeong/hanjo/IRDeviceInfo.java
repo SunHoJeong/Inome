@@ -177,9 +177,8 @@ public class IRDeviceInfo extends Activity {
         +" "+reqDevInfo.getNewDeviceModel()+" "+reqDevInfo.getNewDeviceCompany()+" "+reqDevInfo.getNewDeviceClassification());
 
         if(mode == MainActivity.MODE_REVISE){
-            //url = "http://192.168.137.28:8080/SWCD-war/webresources/IRservice/reviseOneDeviceByFamily";
+
             uri = Server.uriMaker(Server.METHOD_reviseIRdeviceInfo);
-//            resDevInfo.setName(name);
 
             Gson gson = new Gson();
             String json = gson.toJson(reqDevInfo);

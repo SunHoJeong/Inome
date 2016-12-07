@@ -3,6 +3,7 @@ package com.example.jeong.hanjo.utility;
 import android.net.Uri;
 import android.util.Log;
 
+import com.example.jeong.hanjo.data.CustomInstruction;
 import com.example.jeong.hanjo.data.DoorlockLog;
 import com.example.jeong.hanjo.data.ResponseIRDevice;
 import com.example.jeong.hanjo.data.ResponseUserInfo;
@@ -29,6 +30,8 @@ public class Server {
     public static final int METHOD_remoteDevice = 10;
     public static final int METHOD_doorlockOpen = 11;
     public static final int METHOD_addIRcode = 12;
+    public static final int METHOD_showCustomInstruction = 13;
+
     //remoteIRdevice
     //userAc, showIRdevicelist
     //getComList
@@ -157,19 +160,15 @@ public class Server {
         List<ResponseIRDevice> list = Arrays.asList(array);
         ArrayList<ResponseIRDevice> ResponseIRDeviceList = new ArrayList<ResponseIRDevice>(list);
 
-        for(int i=0; i<list.size(); i++) {
-            //Log.i("--Server.showUserInfo--", "count:" + i + "-" + list.get(i).getId());
-        }
-
         return ResponseIRDeviceList;
     }
 
     public static String remoteDevice(String userId, String userPw, String deviceName, String instruction){
         HttpHandler hp = new HttpHandler();
         String result = null;
-        String tempUri = uriMaker(METHOD_remoteDevice, userId, userPw);
+        String tempUri = uriMaker(METHOD_remoteDevice, userId, userPw, deviceName);
         Uri.Builder tempUri2 = Uri.parse(tempUri).buildUpon();
-        String uri = tempUri2.appendQueryParameter("deviceName",deviceName).appendQueryParameter("userInstruction",instruction)
+        String uri = tempUri2.appendQueryParameter("userInstruction",instruction)
         .build().toString();
 
         try {
@@ -199,6 +198,72 @@ public class Server {
         return result;
     }
 
+    public static String addIRCode(String familyId, String familyPw, String deviceName, String userInstruction){
+        HttpHandler hp = new HttpHandler();
+        String result = null;
+        String tempUri = uriMaker(METHOD_addIRcode, familyId, familyPw, deviceName);
+        Uri.Builder tempUri2 = Uri.parse(tempUri).buildUpon();
+        String uri = tempUri2.appendQueryParameter("userInstruction", userInstruction)
+                .build().toString();
+
+        try {
+            result = hp.execute(uri,"GET").get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    public static ArrayList<CustomInstruction> showCustomInstruction(String userId, String userPw, String deviceName){
+        HttpHandler hp = new HttpHandler();
+        String result = null;
+        String uri = uriMaker(METHOD_showCustomInstruction, userId, userPw, deviceName);
+
+        try {
+            result = hp.execute(uri,"GET").get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        Gson gson = new Gson();
+        CustomInstruction[] array = gson.fromJson(result, CustomInstruction[].class);
+        List<CustomInstruction> list = Arrays.asList(array);
+        ArrayList<CustomInstruction> customIRlist = new ArrayList<CustomInstruction>(list);
+
+        return customIRlist;
+    }
+
+    public static String uriMaker(int mode, String id, String pw, String deviceName){
+        Uri.Builder baseUri = Uri.parse("http://192.168.137.14:8080/SWCD-war").buildUpon();
+        String makedUri = null;
+
+        switch(mode){
+            case METHOD_remoteDevice:
+                makedUri = baseUri.appendPath("webresources").appendPath("IRservice").appendPath("remoteControlByUser")
+                        .appendQueryParameter("userId",id).appendQueryParameter("userPw",pw).appendQueryParameter("deviceName", deviceName)
+                .build().toString();
+                break;
+            case METHOD_addIRcode:
+                makedUri = baseUri.appendPath("webresources").appendPath("IRservice").appendPath("addIRInstructionByFamily")
+                        .appendQueryParameter("familyId", id).appendQueryParameter("familyPw", pw).appendQueryParameter("deviceName", deviceName)
+                        .build().toString();
+                break;
+
+            case METHOD_showCustomInstruction:
+                    makedUri = baseUri.appendPath("webresources").appendPath("IRservice").appendPath("getAllCustomInstructionByUser")
+                    .appendQueryParameter("userId", id).appendQueryParameter("userPw", pw).appendQueryParameter("deviceName",deviceName)
+                    .build().toString();
+                break;
+        }
+
+        return makedUri;
+    }
+
     public static String uriMaker(int mode, String id, String pw){
         Uri.Builder baseUri = Uri.parse("http://192.168.137.14:8080/SWCD-war").buildUpon();
         String makedUri = null;
@@ -223,19 +288,10 @@ public class Server {
                 makedUri = baseUri.appendPath("webresources").appendPath("IRservice").appendPath("showAllDoorlocklogByFamily")
                         .appendQueryParameter("familyId",id).appendQueryParameter("familyPw",pw).build().toString();
                 break;
-            case METHOD_remoteDevice:
-                makedUri = baseUri.appendPath("webresources").appendPath("IRservice").appendPath("remoteControlByUser")
-                        .appendQueryParameter("userId",id).appendQueryParameter("userPw",pw).build().toString();
-                break;
             case METHOD_doorlockOpen:
                 makedUri = baseUri.appendPath("webresources").appendPath("IRservice").appendPath("doorlockOpenByUser")
-                        .appendQueryParameter("userId",id).appendQueryParameter("userPw",pw).build().toString();
+                        .appendQueryParameter("userId", id).appendQueryParameter("userPw", pw).build().toString();
                 break;
-            case METHOD_addIRcode:
-                makedUri = baseUri.appendPath("webresources").appendPath("IRservice").appendPath("addIRInstructionByFamily")
-                        .appendQueryParameter("familyId",id).appendQueryParameter("familyPw",pw).appendQueryParameter("deviceName","팔달관에어컨")
-                        .appendQueryParameter("userInstruction","Aircondition_Temp-").build().toString();
-
         }
         return makedUri;
     }

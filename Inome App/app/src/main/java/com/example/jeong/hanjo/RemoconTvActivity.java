@@ -102,4 +102,12 @@ public class RemoconTvActivity extends Activity {
         Server.remoteDevice(userId,userPw, devInfo.getName(),"TV_9");
         Toast.makeText(RemoconTvActivity.this, "tv9", Toast.LENGTH_SHORT).show();
     }
+
+    public void btn_customInstructionClicked(View v){
+        Intent intent = new Intent(RemoconTvActivity.this, CustomIRcodeActivity.class);
+        intent.putExtra("userId", userId);
+        intent.putExtra("userPw", userPw);
+        intent.putExtra("deviceName", devInfo.getName());
+        startActivity(intent);
+    }
 }

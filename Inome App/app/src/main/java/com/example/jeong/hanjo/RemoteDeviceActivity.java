@@ -64,6 +64,9 @@ public class RemoteDeviceActivity extends Activity {
                     intent.putExtra("devInfo", item);
                     startActivity(intent);
                 }
+                else if(item.getClassification().equals("doorlock")){
+                    String result = Server.doorlockOpen(userId, userPw);
+                }
                 //해당 아이템의 객체를 얻음 -> classification으로!
                 //객체에서 분류에 따른 UI를 열어줌
 

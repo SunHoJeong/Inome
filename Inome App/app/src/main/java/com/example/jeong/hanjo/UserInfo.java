@@ -153,7 +153,6 @@ public class UserInfo extends Activity {
             }
         }
         else if(mode == MainActivity.MODE_ADD){
-            //uri = "http://192.168.137.28:8080/SWCD-war/webresources/userservice/addOneUserByFamily";
             uri = Server.uriMaker(Server.METHOD_addUserInfo);
             Gson gson = new Gson();
             String json = gson.toJson(reqUserInfo);
@@ -168,14 +167,7 @@ public class UserInfo extends Activity {
             }
 
             if(res.equals("\"success\"")){
-//                resUserInfo.setId(id);
-//                resUserInfo.setPw(pw);
-//                resUserInfo.setName(name);
-//                resUserInfo.setPhone(phone);
-//                resUserInfo.setAuthority(authority);
-//
-//                intent.putExtra("update", resUserInfo);
-//                setResult(RESULT_OK, intent);
+
                 Log.i("--UserInfo--", "success");
                 Toast.makeText(UserInfo.this, res, Toast.LENGTH_SHORT).show();
                 finish();

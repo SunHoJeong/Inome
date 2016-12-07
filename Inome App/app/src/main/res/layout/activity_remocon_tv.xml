@@ -10,14 +10,12 @@
         android:layout_height="0dp"
         android:layout_weight="9"
         android:orientation="vertical"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="30dp"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0.5"
             android:orientation="horizontal">
             <LinearLayout
                 android:layout_width="0dp"
@@ -290,10 +288,29 @@
                     android:onClick="btn_tv_0Clicked"
                     android:src="@drawable/tv_0"/>
             </LinearLayout>
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"></LinearLayout>
+                android:layout_weight="1">
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:onClick="btn_customInstructionClicked"
+                    android:src="@drawable/remotedevice"
+                    android:layout_above="@+id/textView7"
+                    android:layout_centerHorizontal="true" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:text="사용자IR명령어"
+                    android:textColor="#73F0E5"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentStart="true"
+                    android:id="@+id/textView7" />
+
+            </RelativeLayout>
 
         </LinearLayout>
 

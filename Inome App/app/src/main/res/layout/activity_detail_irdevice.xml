@@ -175,6 +175,23 @@
             android:textSize="15dp"
             android:text="디바이스정보수정"
             android:textColor="#73F0E5"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:background="@android:color/transparent"
+            android:paddingTop="20dp"
+            android:src="@drawable/revise_device"
+            android:onClick="addCustomIRcodeClicked"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="65dp"
+            android:textSize="15dp"
+            android:text="IR명령어추가"
+            android:textColor="#73F0E5"/>
     </LinearLayout>
 
 

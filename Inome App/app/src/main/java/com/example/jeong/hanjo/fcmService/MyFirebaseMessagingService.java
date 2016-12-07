@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
 import com.example.jeong.hanjo.MainActivity;
 import com.example.jeong.hanjo.R;
@@ -22,11 +23,14 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     // [START receive_message]
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
+        String title = remoteMessage.getNotification().getTitle();
+        String body = remoteMessage.getNotification().getBody();
         //추가한것
-        sendNotification(remoteMessage.getData().get("message"));
+        sendNotification(title, body);
+        Log.d(TAG, title+"/"+body);
     }
 
-    private void sendNotification(String messageBody) {
+    private void sendNotification(String msgTitle, String msgBody) {
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
@@ -35,8 +39,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.app_icon)
-                .setContentTitle("가족 구성원이 들어왔습니다")
-                .setContentText(messageBody)
+                .setContentTitle(msgTitle)
+                .setContentText(msgBody)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent);

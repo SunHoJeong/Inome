@@ -1,14 +1,18 @@
 package com.example.jeong.hanjo;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.jeong.hanjo.data.ResponseIRDevice;
+import com.example.jeong.hanjo.utility.Server;
 
 /**
  * Created by Jeong on 2016-11-17.
@@ -60,6 +64,40 @@ public class DetailIRdeviceActivity extends Activity{
         intent.putExtra("mode", MainActivity.MODE_REVISE);
         intent.putExtra("deviceInfo", dev);
         startActivityForResult(intent, 2);
+    }
+
+    public void addCustomIRcodeClicked(View v){
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+        alert.setTitle("User IR 명령어 추가");
+        alert.setMessage("추가하실 명령어 이름을 입력해 주세요");
+
+        // Set an EditText view to get user input
+        final EditText input = new EditText(this);
+        alert.setView(input);
+
+        alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                String value = input.getText().toString();
+                if(value != null){
+                    String result = Server.addIRCode(familyId, familyPw, dev.getName(), value);
+                }
+                else{
+                    Toast.makeText(DetailIRdeviceActivity.this, "명령어 이름을 입력해주세요", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+        alert.setNegativeButton("취소",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        Toast.makeText(DetailIRdeviceActivity.this, "취소 되었습니다", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        alert.show();
+
     }
 
     @Override

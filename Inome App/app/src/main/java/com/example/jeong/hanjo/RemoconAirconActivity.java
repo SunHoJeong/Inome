@@ -28,8 +28,13 @@ public class RemoconAirconActivity extends Activity{
 
     }
     public void btn_aircon_onClicked(View v){
-        Server.remoteDevice(userId, userPw, devInfo.getName(), "Aircondition_Power");
-        Toast.makeText(RemoconAirconActivity.this, "Aircondition_Power", Toast.LENGTH_SHORT).show();
+        Server.remoteDevice(userId, userPw, devInfo.getName(), "Aircondition_Power_On");
+        Toast.makeText(RemoconAirconActivity.this, "Aircondition_Power_On", Toast.LENGTH_SHORT).show();
+    }
+
+    public void btn_aircon_offClicked(View v){
+        Server.remoteDevice(userId, userPw, devInfo.getName(), "Aircondition_Power_Off");
+        Toast.makeText(RemoconAirconActivity.this, "Aircondition_Power_Off", Toast.LENGTH_SHORT).show();
     }
 
     public void btn_aircon_wind_upClicked(View v){
@@ -46,6 +51,14 @@ public class RemoconAirconActivity extends Activity{
 
     public void btn_aircon_temp_downClicked(View v){
         Toast.makeText(RemoconAirconActivity.this, "tempdown", Toast.LENGTH_SHORT).show();
+    }
+
+    public void btn_customInstructionClicked(View v){
+        Intent intent = new Intent(RemoconAirconActivity.this, CustomIRcodeActivity.class);
+        intent.putExtra("userId", userId);
+        intent.putExtra("userPw", userPw);
+        intent.putExtra("deviceName", devInfo.getName());
+        startActivity(intent);
     }
 
 }
