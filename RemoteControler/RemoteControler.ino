@@ -2,12 +2,6 @@
 #include <string.h>
 
 
-#define POWER          0xE0E040BF
-
-#define TV_VolUP 0xE0E0E01F
-#define TV_CHANUP 0xE0E048B7
-
-
 #define SAMSUNG_BITS  32 
 #define LG_BITS 28
 int RECV_PIN = 11;
