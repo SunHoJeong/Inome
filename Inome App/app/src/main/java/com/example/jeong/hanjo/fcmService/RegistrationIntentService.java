@@ -1,4 +1,4 @@
-package com.example.jeong.hanjo.gcm;
+package com.example.jeong.hanjo.fcmService;
 
 import android.annotation.SuppressLint;
 import android.app.IntentService;

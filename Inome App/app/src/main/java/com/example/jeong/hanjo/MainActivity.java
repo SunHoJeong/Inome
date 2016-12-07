@@ -1,21 +1,15 @@
 package com.example.jeong.hanjo;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.jeong.hanjo.utility.BluetoothService;
 import com.example.jeong.hanjo.utility.HttpHandler;
 import com.example.jeong.hanjo.utility.Server;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -28,11 +22,6 @@ public class MainActivity extends AppCompatActivity {
     RECOBeaconManager 객체 생성 시 사용합니다.*/
     public static final boolean SCAN_RECO_ONLY = true;
     public static final String RECO_UUID = "24DDF411-8CF1-440C-87CD-E368DAF9C93E";
-//    public static final String PROPERTY_REG_ID = "registration_id";
-//    public static final String PROPERTY_APP_VERSION = "appVersion";
-//    static String SENDER_ID = "1033891114261";
-
-
 
     /* 백그라운드 ranging timeout을 설정합니다.
        true일 경우, 백그라운드에서 입장한 region에서 ranging이 실행 되었을 때, 10초 후 자동으로 정지합니다.
@@ -47,24 +36,24 @@ public class MainActivity extends AppCompatActivity {
     private int MODE_USER = 1;
     private int MODE_FAMILY = 2;
     EditText inputId, inputPw;
-    CheckBox autoLogin;
-    SharedPreferences pref;
-    SharedPreferences.Editor editor;
+//    CheckBox autoLogin;
+//    SharedPreferences pref;
+//    SharedPreferences.Editor editor;
 
     // Intent request code
     private static final int REQUEST_CONNECT_DEVICE = 1;
     private static final int REQUEST_ENABLE_BT = 2;
 
-    private BluetoothService btService = null;
+//    private BluetoothService btService = null;
 
-    private final Handler mHandler = new Handler() {
-
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-        }
-
-    };
+//    private final Handler mHandler = new Handler() {
+//
+//        @Override
+//        public void handleMessage(Message msg) {
+//            super.handleMessage(msg);
+//        }
+//
+//    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,18 +63,8 @@ public class MainActivity extends AppCompatActivity {
         inputPw = (EditText)findViewById(R.id.editText_pw);
 
         FirebaseMessaging.getInstance().subscribeToTopic("news");
-        FirebaseInstanceId.getInstance().getToken();
-
-        //autoLogin = (CheckBox)findViewById(R.id.checkBox_login);
-
-//
-//        pref = getSharedPreferences("loginInfo",Activity.MODE_PRIVATE);
-//        editor = pref.edit();
-//        editor.putString("userId", "user1");
-//        editor.putString("userPw", "user1");
-//        editor.putString("familyId", "_id");
-//        editor.putString("familyPw","_pw");
-//        editor.commit();
+        String token = FirebaseInstanceId.getInstance().getToken();
+        Log.d(TAG, "--token:"+token);
 
 
     }
@@ -160,39 +139,39 @@ public class MainActivity extends AppCompatActivity {
 //    }
 
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        switch (requestCode) {
-            case REQUEST_CONNECT_DEVICE:
-                // When DeviceListActivity returns with a device to connect
-                if (resultCode == Activity.RESULT_OK) {
-                    btService.getDeviceInfo(data);
-                }
-                break;
-
-            case REQUEST_ENABLE_BT:
-                // When the request to enable Bluetooth returns
-                if (resultCode == Activity.RESULT_OK) {
-                    // 확인 눌렀을 때
-                    //Next Step
-                    btService.scanDevice();
-                } else {
-                    // 취소 눌렀을 때
-                    Log.d(TAG, "Bluetooth is not enabled");
-                }
-                break;
-        }
-    }
-
-    public void btn_bluetoothClicked(View v){
-        if(btService.getDeviceState()) {
-            // 블루투스가 지원 가능한 기기일 때
-            btService.enableBluetooth();
-        } else {
-            finish();
-        }
-
-    }
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//
+//        switch (requestCode) {
+//            case REQUEST_CONNECT_DEVICE:
+//                // When DeviceListActivity returns with a device to connect
+//                if (resultCode == Activity.RESULT_OK) {
+//                    btService.getDeviceInfo(data);
+//                }
+//                break;
+//
+//            case REQUEST_ENABLE_BT:
+//                // When the request to enable Bluetooth returns
+//                if (resultCode == Activity.RESULT_OK) {
+//                    // 확인 눌렀을 때
+//                    //Next Step
+//                    btService.scanDevice();
+//                } else {
+//                    // 취소 눌렀을 때
+//                    Log.d(TAG, "Bluetooth is not enabled");
+//                }
+//                break;
+//        }
+//    }
+//
+//    public void btn_bluetoothClicked(View v){
+//        if(btService.getDeviceState()) {
+//            // 블루투스가 지원 가능한 기기일 때
+//            btService.enableBluetooth();
+//        } else {
+//            finish();
+//        }
+//
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

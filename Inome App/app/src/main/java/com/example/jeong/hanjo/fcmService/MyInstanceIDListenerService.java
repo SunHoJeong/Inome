@@ -1,4 +1,4 @@
-package com.example.jeong.hanjo.gcm;
+package com.example.jeong.hanjo.fcmService;
 
 import android.content.Intent;
 
@@ -15,7 +15,6 @@ public class MyInstanceIDListenerService extends FirebaseInstanceIdService {
     @Override
     public void onTokenRefresh() {
         String token = FirebaseInstanceId.getInstance().getToken();
-            //token등록?
 
         Intent intent = new Intent(this, RegistrationIntentService.class);
         startService(intent);

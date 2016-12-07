@@ -1,4 +1,4 @@
-package com.example.jeong.hanjo.gcm;
+package com.example.jeong.hanjo.fcmService;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;

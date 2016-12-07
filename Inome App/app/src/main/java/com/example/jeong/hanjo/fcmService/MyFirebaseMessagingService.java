@@ -1,4 +1,4 @@
-package com.example.jeong.hanjo.gcm;
+package com.example.jeong.hanjo.fcmService;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -22,7 +22,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     // [START receive_message]
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-
         //추가한것
         sendNotification(remoteMessage.getData().get("message"));
     }
@@ -35,8 +34,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle("FCM Push Test")
+                .setSmallIcon(R.drawable.app_icon)
+                .setContentTitle("가족 구성원이 들어왔습니다")
                 .setContentText(messageBody)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)

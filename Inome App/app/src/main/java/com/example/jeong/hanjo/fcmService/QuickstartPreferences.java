@@ -1,4 +1,4 @@
-package com.example.jeong.hanjo.gcm;
+package com.example.jeong.hanjo.fcmService;
 
 /**
  * Created by Jeong on 2016-12-04.
