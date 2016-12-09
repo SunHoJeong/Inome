@@ -43,12 +43,4 @@
         android:layout_below="@+id/editText_pw"
         android:layout_alignEnd="@+id/editText_pw" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="addIR"
-        android:onClick="addClicked"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/btn_login" />
-
 </RelativeLayout>

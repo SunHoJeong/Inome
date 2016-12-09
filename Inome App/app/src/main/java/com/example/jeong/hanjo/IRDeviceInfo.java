@@ -127,7 +127,7 @@ public class IRDeviceInfo extends Activity {
         });
 
         holder.spinner_model = (Spinner)findViewById(R.id.spinner_model);
-        String[] str_model = {"선택해주세요","55555555","66666666"};
+        String[] str_model = {"선택해주세요","KS9800", "KU6190", "K5550", "LGTVOLED77G6K", "60LF6500", "FQ251LC1", "LPQ1000VF"};
         adapter_model = new ArrayAdapter<String>(this, R.layout.spinner_item, str_model);
         holder.spinner_model.setAdapter(adapter_model);
         holder.spinner_model.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -254,7 +254,7 @@ public class IRDeviceInfo extends Activity {
         String result = null;
         HttpHandler hp = new HttpHandler();
         try {
-            result = hp.execute("http://192.168.137.14:8080/SWCD-war/webresources/IRservice/getAllDeviceCompanyByFamily?familyId="+familyId+"&familyPw="+familyPw, "GET").get();
+            result = hp.execute("http://192.168.137.95:8080/SWCD-war/webresources/IRservice/getAllDeviceCompanyByFamily?familyId="+familyId+"&familyPw="+familyPw, "GET").get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {

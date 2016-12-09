@@ -239,7 +239,7 @@ public class Server {
     }
 
     public static String uriMaker(int mode, String id, String pw, String deviceName){
-        Uri.Builder baseUri = Uri.parse("http://192.168.137.14:8080/SWCD-war").buildUpon();
+        Uri.Builder baseUri = Uri.parse("http://192.168.137.95:8080/SWCD-war").buildUpon();
         String makedUri = null;
 
         switch(mode){
@@ -265,7 +265,7 @@ public class Server {
     }
 
     public static String uriMaker(int mode, String id, String pw){
-        Uri.Builder baseUri = Uri.parse("http://192.168.137.14:8080/SWCD-war").buildUpon();
+        Uri.Builder baseUri = Uri.parse("http://192.168.137.95:8080/SWCD-war").buildUpon();
         String makedUri = null;
         switch (mode){
             case METHOD_login: //GET: id, pw
@@ -297,7 +297,7 @@ public class Server {
     }
 
     public static String uriMaker(int mode){
-        Uri.Builder baseUri = Uri.parse("http://192.168.137.14:8080/SWCD-war").buildUpon();
+        Uri.Builder baseUri = Uri.parse("http://192.168.137.95:8080/SWCD-war").buildUpon();
         String makedUri = null;
 
         switch(mode){

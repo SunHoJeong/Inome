@@ -10,12 +10,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.jeong.hanjo.utility.HttpHandler;
 import com.example.jeong.hanjo.utility.Server;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
-
-import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
     /* true일 경우 레코 비콘만 스캔하며, false일 경우 모든 비콘을 스캔합니다.
@@ -97,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else if(res.equals("\"user\"")){
             Log.i(TAG,"유저 로그인 성공");
-            res = Server.login(id, pw);
+            //res = Server.login(id, pw);
             Toast.makeText(MainActivity.this, res+"모드입니다", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(MainActivity.this, UserIdActivity.class);
             intent.putExtra("id", id);
@@ -193,22 +190,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void addClicked(View v){
-        HttpHandler hp = new HttpHandler();
-        String result = null;
-        String uri = Server.uriMaker(Server.METHOD_addIRcode, "hanjo", "hanjo", "팔달관에어컨");
-        //Log.d("--Main--", result);
-
-        try {
-            result = hp.execute(uri,"GET").get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-
     }
 
 }
