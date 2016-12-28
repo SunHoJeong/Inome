@@ -273,7 +273,7 @@ public class IRDeviceInfo extends Activity {
         String result = null;
         HttpHandler hp = new HttpHandler();
         try {
-            result = hp.execute("http://192.168.137.14:8080/SWCD-war/webresources/IRservice/getAllDeviceClassification?" +
+            result = hp.execute("http://192.168.1.4:8080/SWCD-war/webresources/IRservice/getAllDeviceClassification?" +
                     "familyId="+familyId+"&familyPw="+familyPw+"&company="+company, "GET").get();
         } catch (InterruptedException e) {
             e.printStackTrace();
